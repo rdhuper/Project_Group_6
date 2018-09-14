@@ -1,294 +1,69 @@
-# Project_Group_6
+# Project_Group_6 - Project #1
 
-## Test
-### Testing
-
------------------------------------------
-
-### Class Objectives
-
-#### Day One: Class Objectives
-
-* Students will be able to articulate the requirements for Project 1.
-
-* Students will be able to create new branches with Git.
-
-* Students will be able to push local branches to GitHub.
-
-
-#### Day Two: Class Objectives
-
-* Project Work
-
-#### Day Three: Class Objectives
-
-* Project Work
+## Which City Would you Choose?
+### Alex Barrera, Rohan Dupher, Christina Vavoulis
 
 -----------------------------------------
 
-### Week Seven | Activities
+#### Overview
 
-#### Day One: Activities
+For this project we used city data from the Teleport API to attempt to answer various questions about global cities, such as: 
+Are there patterns between cost of living and taxation, economy and environmental quality, and so on across global cities?
+What are the best and worst cities for qualities like Safety, Healthcare, and Housing?
+What else can we learn about cities around the globe using this rich data source?
 
-* Listed in Slide Deck
 
-#### Day Two: Activities
 
-* Project Work
+#### Prereqs 
 
-#### Day Three: Activities
+For this project, we used a Jupyter notebook to run our Python code. We used common data modules such as numpy, pandas, and matplotlib. 
+We used the free Teleport API for all of our data collection and Google's GEO API for heat map visualizations. 
 
-* [01-Par_Null_Hypothesis](activities/day-3/01-Par_Null_Hypothesis)
-* [02-TTest](activities/day-3/02-TTest)
-* [03-Stu_Sardines](activities/day-3/03-Stu_Sardines)
-* [04-ANOVA](activities/day-3/04-ANOVA)
-* [05-Stu_ANOVA](activities/day-3/05-Stu_ANOVA)
-* [06-Chi_Square](activities/day-3/06-Chi_Square)
-* [07-Stu_Chi_Square](activities/day-3/07-Stu_Chi_Square)
-* [01-Par_Null_Hypothesis](activities/day-3/01-Par_Null_Hypothesis)
-* [01-Par_Null_Hypothesis](activities/day-3/01-Par_Null_Hypothesis)
-* [01-Par_Null_Hypothesis](activities/day-3/01-Par_Null_Hypothesis)
+#### Methodology & Process 
 
+We pulled 100+ metrics for 270 available cities from Teleport's API. 
+The first API call collects a list of all cities available and stores in an array.
+The second API call requests the Teleport City Scores for each city in the array. These are proprietary scores provided by Teleport that represent several more city attributes (100+) rolled up. These scores are 0 to 10 (0 = less desirable, 10 = most desirable) for location attributes (latitude and longitude) and meta attributes like cost of living, safety, education, healthcare, environment, economy, and more. 
+The third API call is a request for a full list of each city's detailed attributes such as days of sunshine, number of libraries, number of schools, LGBT tolerance, average temperature, and many more. This could provide extremely detailed data for each city and would open doors to better visualizations and more accurate statistical testing of our hypothesis. 
+Unfortunately, during QA we noticed the JSON results for each city was vastly different and poorly organized, with no clear structure and no conventional labeling. There was an attempt to parse this to be able to use the data, but were advised by the experienced that this could potentially lead to many more hours of work. Thus we abandoned this rich data in favor of the original Teleport Scores.
 
------------------------------------------
 
-### Week Seven | Video Walkthroughs
+#### Data Processing
 
-* None
+After pulling the city API data from JSON into arrays, we loaded them into dataframes for processing. Initially we explored the datasets by sorting for various attributes and sanity checking the data quality. We also checked the coordinate data before attempting to plot geographic visuals. 
 
------------------------------------------
+We built scatter plots to test our hypotheses and see if there were visual indicators of trends between expected attributes, such as 'economy' and 'business freedom.' Although for some individual cities the data trended together, we were surprised that most of our charts showed little to no association between all of the predicted relationships. Since this original analysis used the Teleport summary scores, we then decided to pull the 100+ additional variables. 
 
-### Week Seven | Slide Deck
+After pulling the additional city variables, discovering the flaws, and then spending a full day's work and more attempting to salvage that data, we cut our losses and returned to the original data pull. Using the coordinates and the Teleport Scores, we made heat maps using the Google Maps Geo API. These were interesting for a few attributes but ultimately not very striking or informative. We believe this to be another result of using scores from 0-10 instead of actual numeric data. 
 
-* Day 1: [Slide Deck](resources/day-1)
 
-* Day 2: None
+#### Retrospective
 
-* Day 3: [Slide Deck](resources/day-3)
+We had a successful project despite several setbacks:
 
+* Finding datasets. We shifted project ideas several times due to a lack of clean, usable data that wasn't prohibitively expensive. 
 
------------------------------------------
-### Week Seven Homework
+* API troubles. We got lots of practice parsing JSON and using a new API. We learned how to use documentation and a lack thereof. Most of all, we learned that not every API has reliable or professionally structured JSON, so it's of utmost importance to quality check as a group instead of assuming any reliability from the developer. 
 
-* None - Project Work
+* Time Management. We got a great head start pulling basic data early in the project, and this ultimately paid off dividends - especially when we could not rely on the richer data source that we made a strong effort to gather and use. This gave our group extra time to align around the project, learn the various aspects, collaborate, and finalize our presentation without having to work late a single night or at the last minute. 
 
 
------------------------------------------
+#### Shout Outs
 
-### Week Seven | Helpful Links
+* Group 6 - Rohan, Christina, and myself - great job, guys! 10/10 would work with again.
 
-* [Introduction To Git](https://medium.com/@ashk3l/a-visual-introduction-to-git-9fdca5d3b43a)
+* Jerome, Jimmy, Eric, Robert - thanks for our endless questions about Git, APIs, JSON, and so much more. 
 
-* [Safest and riskiest areas of New York's subway system revealed in Daily News investigation
-](http://www.nydailynews.com/new-york/nyc-crime/daily-news-analysis-reveals-crime-rankings-city-subway-system-article-1.1836918)
+* Germany and Japan - for being the safest cities with rocking economies in the world.
 
-* [Bullying Rates Drop](https://www.data.gov/education/bullying-rates-drop)
 
-* [Uber Pickups in New York City](https://www.kaggle.com/fivethirtyeight/uber-pickups-in-new-york-city)
 
-### Week Seven | Terminology
 
+#### Teleport API
 
-# Branch Demo
+* [Teleport API Documentation](https://medium.com/@ashk3l/a-visual-introduction-to-git-9fdca5d3b43a)
 
-## 0. Getting the Repo
+#### Google GeoCoding API
 
-Before we can work with Git, we must either **create a new repository**, or **clone one from GitHub**.
+* [Google GeoCoding API Documentation](https://developers.google.com/maps/documentation/geocoding/start)
 
-Note that, in the examples below, we use `git status` before every `git commit`. This is a best practice that helps ensure a deliberate commit history. For brevity's sake, this line will be omitted in future files, **but assume we've always run `git status` before any `git commit`**.
-
-### Clone from GitHub
-
-If someone has already shared a repository on GitHub, you can **clone** it to your local machine with \`git.
-
-```bash
-# Clone an existing repo.
-git clone <repo_url>
-# Navigate into newly created repo directory
-cd <repo_name>
-```
-
-## 1. Add Files
-
-Next, we simply develop as normal, and `commit` our changes whenever we make significant progress.
-
-In general, it's best to **commit early** and **commit often**. Frequent snapshots ensure you'll never be far away from a "last working version".
-
-```bash
-# Create a file, called clean_data.py
-touch clean_data.py
-
-# Add and commit clean_data.py...
-git add clean_data.py
-git status
-git commit -m "First commit."
-
-# Add cleanup code to clean_data.py...
-git add clean_data.py
-git status
-git commit -m "Clean up provided data."
-
-# Add code to export clean data...Note that `add .` adds
-# everything in the current folder
-git add .
-git status
-git commit -m "Export clean data as CSV."
-```
-
-## 2. Create Branches
-
-To create a new, isolated development history, we must create **branches**.
-
-```bash
-# Create new branch and switch to it
-# Long form: `git checkout --branch data_analytics`
-git checkout -b data_analytics
-```
-
-Alternatively, we can create a branch and then switch to it as two separate steps, though this is uncommon.
-
-```bash
-git branch new_branch_name
-git checkout new_branch_name
-```
-
-Once we've created a new branch, we can develop as normal:
-
-```bash
-# Create file to contain data analysis
-git add analysis.ipynb
-git status
-git commit -m "Add Jupyter Notebook for data analysis."
-
-# Add notebook cells summarizing data
-git add analysis.ipynb
-git status
-git commit -m "Add summary tables to Jupyter Notebook."
-
-# Export analyzed data and/or plots
-git add .
-git commit -m "Export analysis results and save plots as PNG files."
-```
-
-### 3. Merge
-
-Once we've developed and tested the changes on our `data_analysis` branch, we can include them in `master` by **merging** the two branches.
-
-```bash
-# Move back to master
-git checkout master
-
-# Merge changes on data_analysis with code on master
-git merge data_analysis
-
-# Delete the data_analysis branch
-git branch -d data_analysis
-```
-
-**N.b.**, deleting the `data_analysis` branch isn't necessary, but it's best practice to prune unneeded branches.
-
-
-
-------------------------
-
-Projects
-
-# Technical Requirements
-
-The technical requirements for Project 1 are as follows.
-
-* [ ] Use Pandas to clean and format your data set(s)
-
-* [ ] Create a Jupyter Notebook describing the **data exploration and cleanup** process
-
-* [ ] Create a Jupyter Notebook illustrating the **final data analysis**
-
-* [ ] Use Matplotlib to create a total of 6-8 visualizations of your data (ideally, at least 2 per "question" you ask of your data)
-
-* [ ] Save PNG images of your visualizations to distribute to the class and instructional team, and for inclusion in your presentation
-
-* [ ] Optionally, use at least one API, if you can find an API with data pertinent to your primary research questions
-
-* [ ] Create a write-up summarizing your major findings. This should include a heading for each "question" you asked of your data, and under each heading, a short description of what you found and any relevant plots.
-
-------------------------
-
-Presentations
-
-# Presentation Requirements
-
-The presentation requirements for Project 1 are as follows.
-
-Your presentation must:
-
-* [ ] Be at least 8-10 min. long
-
-* [ ] Describe the core message or hypothesis for your project.
-
-* [ ] Describe the questions you and your group found interesting, and what motivated you to answer them
-
-* [ ] Summarize where and how you found the data you used to answer these questions
-
-* [ ] Describe the data exploration and cleanup process (accompanied by your Jupyter Notebook)
-
-* [ ] Describe the analysis process (accompanied by your Jupyter Notebook)
-
-* [ ] Summarize your conclusions. This should include a numerical summary (i.e., what data did your analysis yield), as well as visualizations of that summary (plots of the final analysis data)
-
-* [ ] Discuss the implications of your findings. This is where you get to have an open-ended discussion about what your findings "mean".
-
-* [ ] Tell a good story! Storytelling through data analysis is no different than in literature. Find your narrative and use your analysis and visualization skills to highlight conflict and resolution in your data.
-
-----------------------
-
-# Pull Request Workflow
-
-When working with **Pull Requests**, consider the following workflow.
-
-## Review & Merge
-
-* First, create a repository, and add any collaborators via the settings panel.
-
-* On your local machines, create and work on local branches.
-
-* When you're satisfied with the changes you've made to your local branch and want to merge it into `master`, **push the branch to GitHub**.
-
-  * i.e., run: `git push origin <branch_name>`
-
-* Navigate to your GitHub repository in the browser, and select your branch from the drop-down on the home page.
-
-![GitHub's select for which branch to display.](../Images/branch-select.png)
-
-* Open a pull request against your branch.
-
-![The Create Pull Request button.](../Images/create-pr.png)
-
-* Fill out the form that pops up, and press **Create Pull Request**.
-
-* Be sure to discuss **who is responsible for reviewing PRs, and when**.
-
------------------------
-
-* [Hypothesis Testing](http://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/#Hypothesis)
-
-* [The null and alternative hypothesis](https://statistics.laerd.com/statistical-guides/hypothesis-testing-3.php)
-
-* [ T Test ](http://www.statisticshowto.com/probability-and-statistics/t-test/)
-
-* [Chi Square](http://www.statisticshowto.com/chi-square-test-normality/)
-
-* [Chi Square Test](http://www.statisticshowto.com/probability-and-statistics/chi-square/#chisquareqtest)
-
-* [ANOVA](http://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/)
-
-
-* [Critical Values of the Chi-Square
-Distribution](http://www3.med.unipmn.it/~magnani/pdf/Tavole_chi-quadrato.pdf)
-
-* [Confidence Interval](http://www.statisticshowto.com/probability-and-statistics/confidence-interval/)
-
-* [stats.ttest_ind](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html)
-
-* [ttest_1samp](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html)
-
-* [](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.stats.f_oneway.html)
